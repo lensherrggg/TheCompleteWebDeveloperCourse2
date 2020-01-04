@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+    <style type="text/css">
+        #draggable {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+        #droppable {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+        #resizable {
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+        }
+
+        #also {
+            height: 100px;
+            width: 100px;
+            background-color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="draggable">Drag me!</div>
+    <div id="droppable">Drop me!</div>
+    <div id="draggableX">I can only be dragged on axis X</div>
+    <div id="draggableY">I can only be dragged on axis Y</div>
+    <div style="width:400px;height:300px;background-color:yellow;">
+        <p>I'm stuck in the box</p>
+        <span>Drag me everywhere in this box</span>
+    </div>
+
+    <div id="resizable"></div>
+    <div id="also"></div>
+
+    <div id="accordion">
+        <h3>Title</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, beatae minus dolorem ex aspernatur nisi? Esse nesciunt mollitia nemo iste.</p>
+        </div>
+        <h3>Title</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, beatae minus dolorem ex aspernatur nisi? Esse nesciunt mollitia nemo iste.</p>
+        </div>
+        <h3>Title</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, beatae minus dolorem ex aspernatur nisi? Esse nesciunt mollitia nemo iste.</p>
+        </div>
+        <h3>Title</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, beatae minus dolorem ex aspernatur nisi? Esse nesciunt mollitia nemo iste.</p>
+        </div>
+        <h3>Title</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, beatae minus dolorem ex aspernatur nisi? Esse nesciunt mollitia nemo iste.</p>
+        </div>
+    </div>
+
+    <ul id="sortable">
+        <li>Harry</li>
+        <li>Hermione</li>
+        <li>Ron</li>
+        <li>Navel</li>
+    </ul>
+
+    
+    <script type="text/javascript">
+        $("#draggable").draggable();
+        $("#droppable").droppable({
+            drop: function(event, ui) {
+                alert("Dropped");
+            }
+        });
+        $("#draggableX").draggable({axis: "x"});
+        $("#draggableY").draggable({axis: "y"});
+        // Paragraph takes the whole width
+        // So it could only be dragged up and down
+        $("p").draggable({containment: "parent"});
+        $("span").draggable({containment: "parent"});
+        $("#resizable").resizable({
+            grid: 50,
+            alsoResize: "#also",
+            resize: function(event, ui) {
+                if ($("#resizable").width() > 300) {
+                    alert("Too big");
+                }
+            }
+        });
+        $("#also").resizable();
+
+        $("#accordion").accordion();
+        $("#sortable").sortable();
+
+    </script>
+</body>
+</html>
